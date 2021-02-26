@@ -34,20 +34,20 @@ public class userApplication {
     public static void FileWrite(double[] b, String FileName) {
     	
         try {
-			BufferedWriter response = new BufferedWriter(new FileWriter(
-					"C:\\Users\\powerpc.gr\\Desktop\\session02\\" + FileName + ".txt"));
+		BufferedWriter response = new BufferedWriter(new FileWriter(
+				"C:\\Users\\powerpc.gr\\Desktop\\session02\\" + FileName + ".txt"));
 					
-		    for (int p = 0; p < b.length; p++) {
-				String x = String.valueOf(b[p]);
-				response.write(x);
-				response.newLine();
-				}
-				response.flush();
-				response.close();
-			} 
+	    for (int p = 0; p < b.length; p++) {
+		String x = String.valueOf(b[p]);
+		response.write(x);
+		response.newLine();
+	    }
+		response.flush();
+		response.close();
+	} 
         catch (Exception e) {
-			e.printStackTrace();
-		}
+		e.printStackTrace();
+	}
     }
 	    
 	    
@@ -87,40 +87,40 @@ public class userApplication {
 		
     public static void Telemetry(int FlightLevel, int LRmotor, double DurationInMinutes) throws IOException {
 		
-		    BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\powerpc.gr\\Desktop\\session02\\FlightData.txt"));
-		
-		    int ClientPortNum = 48078;
-		    int ServerPortNum = 38048;
-		    byte[] hostIP = { (byte) 155, (byte) 207, (byte) 18, (byte) 208 };     // ITHAKI IP ADDRESS
-		    InetAddress ia = InetAddress.getByAddress(hostIP);
-		
-		    Socket soc = new Socket(ia, ServerPortNum);
-		    OutputStream out = soc.getOutputStream();
-		
-		    String str = "AUTO FLIGHTLEVEL="+FlightLevel+" LMOTOR="+LRmotor+" RMOTOR="+LRmotor+" PILOT \r\n";   //REQUEST CODE SEND WITH TCP
-		    System.out.println("Request sent: " +str);
-	        out.write(str.getBytes());
-	    
-	        InputStream in = soc.getInputStream();
-	        InputStream in2 = soc.getInputStream();    
-	    
-	        DatagramSocket socket = new DatagramSocket(ClientPortNum);
-	        long startTime1 = System.currentTimeMillis();
-	    
-	        for(;System.currentTimeMillis()<startTime1+(DurationInMinutes*1000*60);) {
-	    	
-		        byte[] data = new byte[100];
-		        DatagramPacket packet = new DatagramPacket(data, data.length);      //DATA RECEIVE WITH UDP
-		        socket.receive(packet);
-		    
-		        String response = new String(data, 0, packet.getLength());
-		        writer.write(response);
-		        writer.newLine();
-		        System.out.println(response);
-	    
+	    BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\powerpc.gr\\Desktop\\session02\\FlightData.txt"));
+
+	    int ClientPortNum = 48078;
+	    int ServerPortNum = 38048;
+	    byte[] hostIP = { (byte) 155, (byte) 207, (byte) 18, (byte) 208 };     // ITHAKI IP ADDRESS
+	    InetAddress ia = InetAddress.getByAddress(hostIP);
+
+	    Socket soc = new Socket(ia, ServerPortNum);
+	    OutputStream out = soc.getOutputStream();
+
+	    String str = "AUTO FLIGHTLEVEL="+FlightLevel+" LMOTOR="+LRmotor+" RMOTOR="+LRmotor+" PILOT \r\n";   //REQUEST CODE SEND WITH TCP
+	    System.out.println("Request sent: " +str);
+		out.write(str.getBytes());
+
+		InputStream in = soc.getInputStream();
+		InputStream in2 = soc.getInputStream();    
+
+		DatagramSocket socket = new DatagramSocket(ClientPortNum);
+		long startTime1 = System.currentTimeMillis();
+
+		for(;System.currentTimeMillis()<startTime1+(DurationInMinutes*1000*60);) {
+
+			byte[] data = new byte[100];
+			DatagramPacket packet = new DatagramPacket(data, data.length);      //DATA RECEIVE WITH UDP
+			socket.receive(packet);
+
+			String response = new String(data, 0, packet.getLength());
+			writer.write(response);
+			writer.newLine();
+			System.out.println(response);
+
 	    }
-	        writer.flush();
-		    writer.close();
+	    writer.flush();
+	    writer.close();
 	}
 
 
@@ -746,8 +746,8 @@ public class userApplication {
 	public static void main(String args[]) throws IOException, LineUnavailableException {
 		
 		// Measurements(48002, 38002, "E0000\r", 4);
-		
-        // long str =  EchoRequest(48007, 38007, "E0000T00\r");   //ECHO RETURN TYPE HAS TO BE STRING FOR THIS TO WORK!!!
+
+		// long str =  EchoRequest(48007, 38007, "E0000T00\r");   //ECHO RETURN TYPE HAS TO BE STRING FOR THIS TO WORK!!!
 		// System.out.println("Echo from server:\t" +str);
 
 		// ImageRequest(48002, 38002, "M7160CAM=PTZDIR=RUDP=1024\r");
@@ -756,9 +756,9 @@ public class userApplication {
 
 		// AudioRequest_AQ_DPCM(48002, 38002, "A2039AQF650");
 
-        // RemoteControl(48035, 38035, "V6602", 2);
+       	 	// RemoteControl(48035, 38035, "V6602", 2);
 	
-	    // Telemetry(180, 180, 1);
+	    	// Telemetry(180, 180, 1);
 
-		}
+	}
 }
