@@ -1,4 +1,4 @@
-# Network-Programming-2
+# TCP-UDP-communication
 Server-Client info exchange using TCP and UDP protocols.
 
 The purpose of the code is to exhibit some advanced data receiving and decoding techniques dealing with echo,
